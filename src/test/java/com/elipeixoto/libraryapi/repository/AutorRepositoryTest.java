@@ -1,17 +1,21 @@
 package com.elipeixoto.libraryapi.repository;
 
 import com.elipeixoto.libraryapi.model.Autor;
+import com.elipeixoto.libraryapi.model.Livro;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @SpringBootTest
 public class AutorRepositoryTest {
 
     @Autowired
     AutorRepository autorRepository;
+    @Autowired
+    private LivroRepository livroRepository;
 
 
     @Test

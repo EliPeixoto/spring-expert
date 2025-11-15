@@ -6,6 +6,7 @@ import com.elipeixoto.libraryapi.model.Livro;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -54,5 +55,17 @@ class LivroRepositoryTest {
 
         livroRepository.save(livroParaAtualizar);
 
+    }
+
+    @Test
+    @Transactional
+    void buscaLivro(){
+        UUID idLivro = UUID.fromString("de228c70-4d8a-466f-b9f3-0e70c8f237b1");
+        Livro livro = livroRepository.findById(idLivro).orElse(null);
+
+        System.out.println("Livro: ");
+        System.out.println(livro.getTitulo());
+        System.out.println("Autor: ");
+        System.out.println(livro.getAutor().getNome());
     }
 }
