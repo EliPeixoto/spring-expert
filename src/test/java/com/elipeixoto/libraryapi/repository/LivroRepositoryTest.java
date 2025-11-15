@@ -24,18 +24,35 @@ class LivroRepositoryTest {
 
     @Test
     void deveSalvarLivro(){
-        Autor autor = autorRepository.findById(UUID.fromString("175b326f-0b5c-46b0-aa03-89982f2a7e45")).orElse(null);
+        Autor autor = new Autor();
+        autor.setNome("Eliane");
+        autor.setDataNascimento(LocalDate.of(1986, 03, 07));
+        autor.setNacionalidade("Brasileira");
 
 
         Livro livro = new Livro();
-        livro.setTitulo("Livro 1");
+        livro.setTitulo("Livro 4");
         livro.setPreco(BigDecimal.valueOf(50));
         livro.setGenero(GeneroLivroEnum.MISTERIO);
-        livro.setIsbn("128762142");
+        livro.setIsbn("1287623142");
         livro.setDataPublicacao(LocalDate.of(2025, 10, 31));
         livro.setAutor(autor);
 
-        var livroSalvo = livroRepository.save(livro);
-        System.out.println("Livro salvo: " + livroSalvo);
+         livroRepository.save(livro);
+
+    }
+
+    @Test
+    void deveAtualizarAutorDoLivro(){
+        UUID idLivro = UUID.fromString("ea5c31a2-b242-47ff-89d3-f6ce9cc45399");
+        var livroParaAtualizar = livroRepository.findById(idLivro).orElse(null);
+
+        UUID idAutor = UUID.fromString("32855672-d42d-463f-a3cb-4d0afa37347f");
+        Autor autor = autorRepository.findById(idAutor).orElse(null);
+
+        livroParaAtualizar.setAutor(autor);
+
+        livroRepository.save(livroParaAtualizar);
+
     }
 }
